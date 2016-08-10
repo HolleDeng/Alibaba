@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.devMode" value="true" />
+ 
+ 	<constant name="struts.multipart.saveDir" value="/temp"></constant>
+	<constant name="struts.custom.i18n.resources" value="message"/>
+	
+<package name="default" extends="struts-default" namespace="/">
+	
+  
+	<global-results>
+		<result name="fail">/error.jsp" </result>
+		<result name="login">/user/signin.jsp" </result>
+	</global-results>
+	
+		<!--首页面 -->
+		<action name="productIndex"
+			class="cn.com.alibaba.web.action."
+			method="index">
+			<!-- <result name="manager">userlogout</result> -->
+			<result name="success" >/product/productIndex.jsp</result>
+		</action>
+		<action name="productSearch" 
+			class="cn.com.alibaba.web.action."
+			method="searchProduct">
+			<result name="success">/product/productSearch.jsp</result>
+		</action>
+		
+		<!--商品管理 -->
+		<action name="productDetail"
+			class="cn.com.alibaba.web.action."
+			method="showDetail">
+			<result name="success">/product/productDetail.jsp</result>
+		</action>
+		<action name="productList" 
+			class="cn.com.alibaba.web.action."
+			method="listAllProduct">
+			<result name="success" >/product/productList.jsp</result>
+		</action>
+		<action  name="productAdd"
+			class="cn.com.alibaba.web.action."
+			method="addProduct"  >
+<!-- 			<result name="success">/product/addProduct.jsp</result> -->
+		</action>
+		<action name="productModify" 
+			class="cn.com.alibaba.web.action."
+			method="toModifyProduct">
+			<result name="success" >/product/productModify.jsp</result>
+		</action>
+		<action  name="productModified"
+			class="cn.com.alibaba.web.action."
+			method="modifyProduct">
+			<result type="redirectAction">productList</result>
+		</action>
+		<action name="productDeleteProduct"
+			class="cn.com.alibaba.web.action."
+			method="deleteProductById">
+			<result type="redirectAction">productList</result>
+		</action>
+		
+		<!--用户管理 -->
+		<action name="userTologin"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="toLogin">
+			<result name="success">/user/signin.jsp</result>
+		</action>
+		<action name="userToRegister"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="toRegister">
+			<result name="success">/user/register.jsp</result>
+		</action>
+		<action name="userCheckmail" 
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="checkMail">
+			<result name="checkmail">/user/checkmail.jsp</result>
+		</action>
+		<action name="userRegister"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="register">
+			<result name="success">/user/registed.jsp</result>
+			<result name="refresh">/user/register.jsp</result>
+		</action>
+		
+		<action name="userLogin"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="login">
+			<result name="fail">/user/signin.jsp</result>
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="userManager"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="manager">
+			<result name="fail">/manager.jsp</result>
+			<result type="redirectAction">userListAllUser</result>
+		</action>
+		<action name="userModify"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="modify">
+			<result name="success">/user/myarchives.jsp
+			</result>
+		</action>
+		<action name="userChangeemail"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="changeEmail">
+			<result name="success">/user/myemail.jsp</result>
+		</action>
+		<action name="userChangepwd"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="changePwd">
+			<result name="success">/user/passwordchange.jsp</result>
+		</action>
+		<action name="userQuery"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="query">
+			<result name="success">/user/userQuery.jsp</result>
+		</action>
+		<action name="userDelete"  
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="delete">
+			<result type="redirectAction">userListAllUser</result>
+		</action>
+		<action name="userLogout"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="logout">
+			<result name="manager">/manager.jsp</result>
+			<result name="index">/index.jsp</result>
+		</action>
+		<action name="userListAllUser"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="listAllUser">
+			<result name="success">/user/userList.jsp</result>
+		</action>
+		
+		<!--购物车管理 -->
+		<action name="userAdd2cart"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="add2Cart">
+			<result name="success">/shopcart/shoppingcart.jsp </result>
+		</action>
+		<action name="shopcartShowShopCart"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="showShopCart">
+			<result name="success">/shopcart/shoppingcart.jsp </result>
+		</action>
+		<action name="shopcartRemoveProduct"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="removeById">
+			<result name="success">/shopcart/shoppingcart.jsp </result>
+		</action>
+		<action name="shopcartUndoProduct"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="undoById">
+			<!-- <result type="redirectAction">/shopcart/shoppingcart.jsp </result> -->
+			<result name="success" >/shopcart/shoppingcart.jsp </result>
+		</action>
+		<action name="shopcartAccountCart" 
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="account">
+			<result name="checkout">/shopcart/checkout.jsp </result>
+			<result name="success">/index.jsp </result>
+		</action>
+		<action name="shopcartUpdateProductNum"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="modifyNumber">
+			<result name="success">/shopcart/shoppingcart.jsp </result>
+		</action>
+		
+		<action name="shopcartRemoveAllProduct"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="clearShopCart">
+			<result name="success">/index.jsp </result>
+		</action>
+		<action name="userSaveOrder"
+			class="cn.com.alibaba.web.action.ShopCartMappingDispatchAction"
+			method="checkOut">
+			<result type="redirectAction">orderList</result>
+		</action>
+		
+		<!--订单管理 -->
+		<action name="orderList"
+			class="cn.com.alibaba.web.action.OrderMappingDispatchAction"
+			method="listUserOrders">
+			<result name="success">/order/myorders.jsp
+			</result>
+		</action>
+		<action name="orderDelete"
+			class="cn.com.alibaba.web.action.OrderMappingDispatchAction"
+			method="deleteOrder">
+			<result type="redirectAction">orderList </result>
+		</action>
+		
+		
+		<!-- Ajax的验证 -->
+		<action name="userUsername"
+			class="cn.com.alibaba.web.action.UserMappingDispatchAction"
+			method="usernameValidate">
+			<result name="success">/user/register.jsp </result>
+		</action>
+	
+	</package>
+</struts>
+
+
+
